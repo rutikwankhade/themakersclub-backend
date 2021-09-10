@@ -1,0 +1,28 @@
+{
+  "name": "themakersclub-backend",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index",
+    "dev":"nodemon index"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rutikwankhade/themakersclub-backend.git"
+  },
+  "author": "Rutik Wankhade",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/rutikwankhade/themakersclub-backend/issues"
+  },
+  "homepage": "https://github.com/rutikwankhade/themakersclub-backend#readme",
+  "dependencies": {
+    "dotenv": "^10.0.0",
+    "express": "^4.17.1",
+    "mongoose": "^6.0.5"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.12"
+  }
+}
