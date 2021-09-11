@@ -2,6 +2,8 @@ const express = require('express');
 const router = express.Router();
 const gravatar = require('gravatar');
 const bcrypt = require('bcryptjs');
+const jwt = require('jsonwebtoken');
+require('dotenv').config();
 
 const User = require('../models/User')
 // route - Get all users
@@ -28,9 +30,9 @@ router.post('/', async (req, res) => {
             d: 'mm',
             protocol: 'https'
         })
-        
-        
-        
+
+
+
         user = new User({
             name,
             email,
@@ -43,11 +45,24 @@ router.post('/', async (req, res) => {
         const salt = await bcrypt.genSalt(10)
         user.password = await bcrypt.hash(password, salt)
 
-        await user.save()
+        await user.save();
 
-        res.send('user registered')
 
         //return json webtoken
+        const payload = {
+            user: {
+                id: user.id
+            }
+        }
+
+
+        jwt.sign(payload, process.env.jwtSecret,
+            { expiresIn: 360000 },
+            (err, token) => {
+                if (err) throw err;
+                res.json({ token })
+            })
+
 
 
 
