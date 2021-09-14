@@ -9,6 +9,9 @@ const ProfileSchema = new mongoose.Schema({
     bio: {
         type: String
     },
+    points: {
+        type:Number
+    },
 
     social: {
         github: {

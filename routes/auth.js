@@ -23,7 +23,7 @@ router.get('/', auth, async (req, res) => {
 
 
 // route - /api/auth
-// desc - authenticate user and send token
+// desc - authenticate user and send token 
 //access - public
 
 
