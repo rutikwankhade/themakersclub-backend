@@ -35,4 +35,18 @@ router.post('/', auth, async (req, res) => {
 }
 );
 
+
+
+// Get all discussion posts
+// GET api/discuss-posts
+// public
+router.get('/', async (req, res) => {
+    try {
+        const discussPosts = await DiscussPost.find().sort({ date: -1 });
+        res.json(discussPosts);
+    } catch (err) {
+        res.status(500).send('Server Error');
+    }
+});
+
 module.exports = router;
