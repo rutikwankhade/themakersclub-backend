@@ -36,7 +36,6 @@ router.post('/', auth, async (req, res) => {
 );
 
 
-
 // Get all discussion posts
 // GET api/discuss-posts
 // public
@@ -49,4 +48,23 @@ router.get('/', async (req, res) => {
     }
 });
 
+
+// Get discuss post by ID
+// GET api/posts/:id
+// Public
+
+router.get('/:id', async (req, res) => {
+    try {
+        const discussPost = await DiscussPost.findById(req.params.id);
+
+        if (!discussPost) {
+            return res.status(404).json('discussion not found');
+        }
+
+        res.json(discussPost);
+    } catch (err) {
+
+        res.status(500).send('Server Error');
+    }
+});
 module.exports = router;
