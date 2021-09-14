@@ -1,13 +1,12 @@
 const express = require('express');
-const router = express.Router();
+const router = express.Router()
 const gravatar = require('gravatar');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 require('dotenv').config();
 
 const User = require('../models/User')
-// route - Get all users
-// access public
+
 
 router.post('/', async (req, res) => {
 
