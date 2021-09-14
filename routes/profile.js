@@ -5,9 +5,10 @@ const auth = require('../middleware/auth');
 const Profile = require('../models/Profile');
 const User = require('../models/User');
 
-// Route -    POST api/profile
-// desc -    Create or update user profile
-// access  -  Private
+
+// Create or update user profile
+// POST api / profile
+// Private
 
 router.post('/', auth, async (req, res) => {
 
@@ -42,11 +43,38 @@ router.post('/', auth, async (req, res) => {
             { new: true, upsert: true, setDefaultsOnInsert: true }
         );
         return res.json(profile);
+
+
     } catch (err) {
         console.error(err.message);
         return res.status(500).send('Server Error');
     }
 }
 );
+
+
+
+
+// Get current users profile
+// GET api/profile/me
+// Private
+
+router.get('/me', auth, async (req, res) => {
+    try {
+        const profile = await Profile.findOne({
+            user: req.user.id
+        }).populate('user', ['name', 'avatar']);
+
+        if (!profile) {
+            return res.status(400).json({ msg: 'Profile does not exist' });
+        }
+
+        res.json(profile);
+    } catch (err) {
+        console.error(err.message);
+        res.status(500).send('Server Error');
+    }
+});
+
 
 module.exports = router;
