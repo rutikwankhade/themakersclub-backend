@@ -2,45 +2,48 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const DiscussPostSchema = new Schema({
-  user: {
-    type: Schema.Types.ObjectId
-  },
-  text: {
-    type: String,
-    required: true
-  },
-  title: {
-    type: String
-  },
-  avatar: {
-    type: String
-  },
-  
-  replies: [
-    {
-      user: {
+    user: {
         type: Schema.Types.ObjectId
-      },
-      text: {
+    },
+    text: {
         type: String,
         required: true
-      },
-      name: {
+    },
+    title: {
         type: String
-      },
-      avatar: {
+    },
+    name: {
         type: String
-      },
-      date: {
+    },
+    avatar: {
+        type: String
+    },
+
+    replies: [
+        {
+            user: {
+                type: Schema.Types.ObjectId
+            },
+            text: {
+                type: String,
+                required: true
+            },
+            name: {
+                type: String
+            },
+            avatar: {
+                type: String
+            },
+            date: {
+                type: Date,
+                default: Date.now
+            }
+        }
+    ],
+    date: {
         type: Date,
         default: Date.now
-      }
     }
-  ],
-  date: {
-    type: Date,
-    default: Date.now
-  }
 });
 
-module.exports = mongoose.model('post', DiscussPostSchema);
+module.exports = mongoose.model('discussPost', DiscussPostSchema);
