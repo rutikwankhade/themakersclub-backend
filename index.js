@@ -12,7 +12,7 @@ app.use(cors());
 connectDB();
 
 //init middleware
-app.use(express.json({ extended: false }))
+app.use(express.json());
 
 
 //define routes
