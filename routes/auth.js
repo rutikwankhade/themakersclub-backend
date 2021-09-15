@@ -7,8 +7,12 @@ require('dotenv').config()
 const bcrypt = require('bcryptjs');
 
 
-router.get('/', auth, async (req, res) => {
 
+//get user data by sending token
+//GET api/auth
+//public
+
+router.get('/', auth, async (req, res) => {
 
     try {
         const user = await User.findById(req.user.id).select('-password')
@@ -21,9 +25,8 @@ router.get('/', auth, async (req, res) => {
 });
 
 
-
-// route - /api/auth
-// desc - authenticate user and send token 
+// login - authenticate user and send token 
+//POST  /api/auth
 //access - public
 
 
@@ -61,8 +64,6 @@ router.post('/', async (req, res) => {
                 if (err) throw err;
                 res.json({ token })
             })
-
-
 
 
     } catch (err) {

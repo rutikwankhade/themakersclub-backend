@@ -8,6 +8,10 @@ require('dotenv').config();
 const User = require('../models/User')
 
 
+// register user
+// POST /api/users
+// public
+
 router.post('/', async (req, res) => {
 
     const { name, email, password } = req.body;
@@ -18,18 +22,18 @@ router.post('/', async (req, res) => {
         //if yes send error
         let user = await User.findOne({ email });
         if (user) {
-            return res.status(400).send('User already exists');
+            return res.status(400).json('User already exists');
         }
 
         //if no 
         //get user gravtar
+
         const avatar = gravatar.url(email, {
             s: '200',
             r: 'pg',
             d: 'mm',
             protocol: 'https'
         })
-
 
 
         user = new User({
@@ -60,18 +64,13 @@ router.post('/', async (req, res) => {
             (err, token) => {
                 if (err) throw err;
                 res.json({ token })
-            })
-
-
+            });
 
 
     } catch (err) {
         console.log(err)
-        res.status(400).send(err)
+        res.status(400).json('server error')
     }
-
-
-
 
 });
 
