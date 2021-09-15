@@ -67,4 +67,39 @@ router.get('/:id', async (req, res) => {
         res.status(500).send('Server Error');
     }
 });
+
+
+
+// Reply to a discussion post
+
+//POST api/discuss-posts/replies/:id
+//access private
+
+router.post('/replies/:id', auth, async (req, res) => {
+
+    let { replyText } = req.body;
+
+    try {
+        const user = await User.findById(req.user.id).select('-password');
+
+        const discussPost = await DiscussPost.findById(req.params.id)
+        const newReply = {
+            text: replyText,
+            name: user.name,
+            avatar: user.avatar,
+            user: req.user.id
+        };
+
+        discussPost.replies.unshift(newReply)
+        await discussPost.save();
+
+        res.json(discussPost.replies);
+    } catch (err) {
+        console.error(err.message);
+        res.status(500).send('Server Error');
+    }
+}
+);
+
+
 module.exports = router;
