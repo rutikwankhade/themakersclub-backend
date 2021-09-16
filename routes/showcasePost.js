@@ -39,4 +39,39 @@ router.post('/', auth, async (req, res) => {
 
 
 
+
+// Get all showcase posts
+// GET api/showcase
+// public
+router.get('/', async (req, res) => {
+    try {
+        const showcasePosts = await ShowcasePost.find().sort({ date: -1 });
+        res.json(showcasePosts);
+    } catch (err) {
+        res.status(500).send('Server Error');
+    }
+});
+
+
+
+// Get showcase post by ID
+// GET api/showcase/:id
+// Public
+
+router.get('/:id', async (req, res) => {
+    try {
+        const showcasePost = await ShowcasePost.findById(req.params.id);
+
+        if (!showcasePost) {
+            return res.status(404).json('project not found');
+        }
+
+        res.json(showcasePost);
+    } catch (err) {
+
+        res.status(500).send('Server Error');
+    }
+});
+
+
 module.exports = router;

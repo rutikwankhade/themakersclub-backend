@@ -50,7 +50,7 @@ router.get('/', async (req, res) => {
 
 
 // Get discuss post by ID
-// GET api/posts/:id
+// GET api/discuss-post/:id
 // Public
 
 router.get('/:id', async (req, res) => {
