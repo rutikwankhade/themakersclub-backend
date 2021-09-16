@@ -10,7 +10,12 @@ const ShowcasePostSchema = new Schema({
         required: true
     },
     title: {
-        type: String
+        type: String,
+        required: true
+    },
+    url: {
+        type: String,
+        required: true
     },
     name: {
         type: String

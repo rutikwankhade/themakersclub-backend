@@ -20,6 +20,8 @@ app.use('/api/users', require('./routes/users'));
 app.use('/api/auth', require('./routes/auth'));
 app.use('/api/profile', require('./routes/profile'));
 app.use('/api/discuss-post', require('./routes/discussPost'));
+app.use('/api/showcase', require('./routes/showcasePost'));
+
 
 
 app.get('/', (req, res) => res.send('API is running'))
