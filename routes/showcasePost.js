@@ -74,4 +74,38 @@ router.get('/:id', async (req, res) => {
 });
 
 
+
+
+// Give feedback to a showcase post
+//POST api/showcase/feedback/:id
+//access private
+
+router.post('/feedback/:id', auth, async (req, res) => {
+
+    let { feedbackText, feedbackType } = req.body;
+
+    try {
+        const user = await User.findById(req.user.id).select('-password');
+
+        const showcasePost = await ShowcasePost.findById(req.params.id)
+        const newFeedback = {
+            feedback: feedbackText,
+            feedbackType:feedbackType,
+            name: user.name,
+            avatar: user.avatar,
+            user: req.user.id
+        };
+
+        showcasePost.feedbacks.unshift(newFeedback)
+        await showcasePost.save();
+
+        res.json(showcasePost);
+    } catch (err) {
+        console.error(err.message);
+        res.status(500).send('Server Error');
+    }
+}
+);
+
+
 module.exports = router;
