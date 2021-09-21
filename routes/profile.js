@@ -78,13 +78,13 @@ router.get('/me', auth, async (req, res) => {
 
 
 
-// Get all profiles 
+// Get top maker profiles 
 // GET api/profile
 // public
 
 router.get('/', async (req, res) => {
     try {
-        const profiles = await Profile.find().populate('user', ['name', 'avatar']);
+        const profiles = await Profile.find().populate('user', ['name', 'avatar']).sort({ points: -1 }).limit(10);
         res.json(profiles)
 
     } catch (err) {
@@ -127,7 +127,7 @@ router.post('/points', auth, async (req, res) => {
     //update the points
     const profileFields = {
         points: points,
-    
+
     };
 
     try {
