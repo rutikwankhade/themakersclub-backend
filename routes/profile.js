@@ -117,4 +117,36 @@ router.get('/:user_id', async ({ params: { user_id } }, res) => {
 );
 
 
+// update the points
+// POST api / profile/points
+// Private
+
+router.post('/points', auth, async (req, res) => {
+
+    const { points } = req.points
+    //update the points
+    const profileFields = {
+        points: points,
+    
+    };
+
+    try {
+        // Using upsert option (creates new doc if no match is found):
+        let profile = await Profile.findOneAndUpdate(
+            { user: req.user.id },
+            { $set: profileFields },
+            { new: true, upsert: true, setDefaultsOnInsert: true }
+        );
+        return res.json(profile);
+
+
+    } catch (err) {
+        console.error(err.message);
+        return res.status(500).send('Server Error');
+    }
+}
+);
+
+
+
 module.exports = router;
