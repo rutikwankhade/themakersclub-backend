@@ -123,7 +123,7 @@ router.get('/:user_id', async ({ params: { user_id } }, res) => {
 
 router.post('/points', auth, async (req, res) => {
 
-    const { points } = req.points
+    const { points } = req.body
     //update the points
     const profileFields = {
         points: points,
