@@ -10,24 +10,22 @@ const ProfileSchema = new mongoose.Schema({
         type: String
     },
     points: {
-        type:Number
+        type: Number
     },
 
-    social: {
-        github: {
-            type: String
-        },
-        twitter: {
-            type: String
-        },
-        website: {
-            type: String
-        },
-        linkedin: {
-            type: String
-        },
-
+    github: {
+        type: String
     },
+    twitter: {
+        type: String
+    },
+    website: {
+        type: String
+    },
+    linkedin: {
+        type: String
+    },
+
     date: {
         type: Date,
         default: Date.now

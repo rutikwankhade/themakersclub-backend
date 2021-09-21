@@ -35,9 +35,10 @@ router.post('/', async (req, res) => {
             protocol: 'https'
         })
 
-
+        let userName = name.split(' ').join('').toLowerCase();
         user = new User({
             name,
+            userName,
             email,
             avatar,
             password
