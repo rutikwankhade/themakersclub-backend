@@ -17,7 +17,8 @@ router.post('/', auth, async (req, res) => {
         website,
         twitter,
         github,
-        linkedin
+        linkedin,
+        userName
     } = req.body;
 
 
@@ -25,6 +26,7 @@ router.post('/', auth, async (req, res) => {
     // create a profile
     const profileFields = {
         user: req.user.id,
+        userName:userName,
         bio: bio,
         points: 10,
         website: website,
