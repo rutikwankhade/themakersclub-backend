@@ -99,10 +99,10 @@ router.get('/', async (req, res) => {
 // Public
 
 
-router.get('/:userName', async ({ params: { userName } }, res) => {
+router.get('/:id', async ({ params: { id } }, res) => {
     try {
         const profile = await Profile.findOne({
-            user: userName
+            user: id
         }).populate('user', ['name', 'avatar', 'userName']);
 
         if (!profile) {
