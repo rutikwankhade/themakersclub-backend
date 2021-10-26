@@ -45,9 +45,19 @@ router.post('/',auth, async (req, res) => {
 });
 
 
+// Get all resources
+// GET api/resources
+// public
 
-
-
+router.get('/', async (req, res) => {
+    try {
+        const allResources = await Resource.find().sort({ date: -1 });
+        res.json(allResources);
+       
+    } catch (err) {
+        res.status(500).send('Server Error');
+    }
+});
 
 
 
