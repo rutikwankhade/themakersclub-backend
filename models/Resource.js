@@ -5,7 +5,7 @@ const ResourceSchema = new Schema({
     user: {
         type: Schema.Types.ObjectId
     },
-    url: {
+    resourceUrl: {
         type: String,
         required: true
     },
