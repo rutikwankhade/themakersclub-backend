@@ -94,15 +94,15 @@ router.get('/', async (req, res) => {
     }
 })
 
-// Get profile by username
-// GET api/profile/username
+// Get maker profile by id
+// GET api/profile/id
 // Public
 
 
 router.get('/:id', async ({ params: { id } }, res) => {
     try {
         const profile = await Profile.findOne({
-            user: id
+            profile: id
         }).populate('user', ['name', 'avatar', 'userName']);
 
         if (!profile) {
